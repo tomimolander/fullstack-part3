@@ -2,7 +2,7 @@ const express = require('express')
 var morgan = require('morgan')
 const cors = require('cors')
 
-const baseUrl = 'http://localhost:3001/api/persons'
+const baseUrl = 'http://localhost:3001/persons'
 
 const app = express()
 
@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
   res.send('<h1>Hello World!</h1>')
 })
 
-app.get('/api/persons', (req, res) => {
+app.get('/persons', (req, res) => {
   res.json(persons)
 })
 
@@ -62,7 +62,7 @@ app.get('/info', (req, res) => {
     `)
 })
 
-app.get('/api/persons/:id', (request, response) => {
+app.get('/persons/:id', (request, response) => {
   const id = Number(request.params.id)
   const person = persons.find(person => person.id === id)
   
@@ -73,7 +73,7 @@ app.get('/api/persons/:id', (request, response) => {
   }
 })
 
-app.post('/api/persons', (request, response) => {
+app.post('/persons', (request, response) => {
     const body = request.body
 
     if (!body.name || !body.number) {
@@ -98,7 +98,7 @@ app.post('/api/persons', (request, response) => {
     response.json(person)
   })
 
-app.delete('/api/persons/:id', (request, response) => {
+app.delete('/persons/:id', (request, response) => {
     const id = Number(request.params.id)
     persons = persons.filter(person => person.id !== id)
   
