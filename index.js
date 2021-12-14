@@ -2,12 +2,11 @@ const express = require('express')
 var morgan = require('morgan')
 const cors = require('cors')
 
-const baseUrl = 'http://localhost:3001/persons'
-
 const app = express()
 
 app.use(express.json())
 app.use(cors())
+app.use(express.static('build'))
 
 morgan.token('person', (request, response) => {
     if (request.method === 'POST') {
@@ -49,7 +48,7 @@ app.get('/', (req, res) => {
   res.send('<h1>Hello World!</h1>')
 })
 
-app.get('/persons', (req, res) => {
+app.get('/api/persons', (req, res) => {
   res.json(persons)
 })
 
@@ -62,7 +61,7 @@ app.get('/info', (req, res) => {
     `)
 })
 
-app.get('/persons/:id', (request, response) => {
+app.get('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id)
   const person = persons.find(person => person.id === id)
   
@@ -73,7 +72,7 @@ app.get('/persons/:id', (request, response) => {
   }
 })
 
-app.post('/persons', (request, response) => {
+app.post('/api/persons', (request, response) => {
     const body = request.body
 
     if (!body.name || !body.number) {
@@ -98,7 +97,7 @@ app.post('/persons', (request, response) => {
     response.json(person)
   })
 
-app.delete('/persons/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
     persons = persons.filter(person => person.id !== id)
   
