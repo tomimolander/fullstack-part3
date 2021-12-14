@@ -16,10 +16,6 @@ morgan.token('person', (request, response) => {
 })
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :person'))
-/*
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms :person', {
-    skip: function (tokens, req, res) { return tokens.method !== 'POST'}
-  }))*/
 
 let persons =  [
     {
